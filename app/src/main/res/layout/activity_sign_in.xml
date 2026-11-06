@@ -71,6 +71,12 @@
             android:textAlignment="gravity"
             android:textSize="18sp"/>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:animateLayoutChanges="true">
+
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -82,6 +88,14 @@
             android:id="@+id/buttonSignIn"
             android:textStyle="bold"
             app:cornerRadius="8dp"/>
+
+            <ProgressBar
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center"
+                android:visibility="invisible"/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/textCreateNewAccount"
