@@ -6,7 +6,7 @@
 ##### User can sign-in, user can sign-out, user can create-accout.
 
 ### Screenshot 1 (App Icon):
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="150" alt="Screenshot 1" src="https://github.com/user-attachments/assets/220428cc-fac4-4be1-a4c7-bfc356a28081"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="140" alt="Screenshot 1" src="https://github.com/user-attachments/assets/220428cc-fac4-4be1-a4c7-bfc356a28081"></a>  
 Here is the app icon I created for the application. The color is based on the app's primary color.
 
 ### Screenshot 2 (Sign Up Page):
