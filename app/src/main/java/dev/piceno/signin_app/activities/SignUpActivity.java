@@ -1,7 +1,5 @@
 package dev.piceno.signin_app.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,35 +10,33 @@ import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
-
-import dev.piceno.signin_app.R;
 import dev.piceno.signin_app.databinding.ActivitySignUpBinding;
 import dev.piceno.signin_app.utilities.Constants;
 import dev.piceno.signin_app.utilities.PreferenceManager;
 
+/**
+ * This class handles the sign-up process.
+ */
 public class SignUpActivity extends AppCompatActivity {
 
+    // To retrieve binding and the Preference Manager
     private ActivitySignUpBinding binding;
+    private PreferenceManager preferenceManager;
     private String encodeImage;
 
-    private PreferenceManager preferenceManager;
+    /**
+     * Binds the View upon creation.
+     *
+     * @param savedInstanceState The reference to the Bundle object for state restoration.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +46,9 @@ public class SignUpActivity extends AppCompatActivity {
         setListeners();
     }
 
+    /**
+     * Creates listeners for clicking sign up, add image, and sign in buttons.
+     */
     private void setListeners() {
         binding.textSignIn.setOnClickListener(view -> onBackPressed());
         binding.buttonSignUp.setOnClickListener(view -> {
@@ -65,13 +64,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
+     * Displays a Toast message with a specified string. Used for visual feedback on the user end.
      *
-     * @param message
+     * @param message The message being displayed to the user.
      */
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Handles the signup process for creating new users.
+     */
     private void signUp() {
         loading(true);
 
@@ -80,7 +83,6 @@ public class SignUpActivity extends AppCompatActivity {
         user.put(Constants.KEY_NAME, binding.inputName.getText().toString());
         user.put(Constants.KEY_EMAIL, binding.inputEmail.getText().toString());
         user.put(Constants.KEY_PASSWORD, binding.inputPassword.getText().toString());
-
         user.put(Constants.KEY_IMAGE, encodeImage);
 
         database.collection(Constants.KEY_COLLECTION_USERS)
@@ -101,6 +103,12 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Encodes bitmap to JPEG for retrieval and use.
+     *
+     * @param bitmap The bitmap being converted (compressed) to JPEG.
+     * @return Returns the compressed encoded bitmap image.
+     */
     private String encodeImage(Bitmap bitmap) {
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
@@ -131,9 +139,9 @@ public class SignUpActivity extends AppCompatActivity {
     );
 
     /**
+     * Determines if the Signup credentials are properly formatted prior to searching database
      *
-     *
-     * @return
+     * @return Returns true if valid-credentials; false otherwise.
      */
     private Boolean validSignUp() {
         if (encodeImage == null) {
@@ -162,6 +170,11 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Displays the loading icon over the button, indicating searching database process.
+     *
+     * @param isLoading Loading indicator boolean.
+     */
     private void loading(Boolean isLoading) {
         if (isLoading) {
             binding.buttonSignUp.setVisibility(View.INVISIBLE);

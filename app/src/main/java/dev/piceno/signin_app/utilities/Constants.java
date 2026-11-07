@@ -1,5 +1,8 @@
 package dev.piceno.signin_app.utilities;
 
+/**
+ * This class contains the KEYs required for data manipulation.
+ */
 public class Constants {
     public static final String KEY_COLLECTION_USERS = "User";
     public static final String KEY_NAME = "name";

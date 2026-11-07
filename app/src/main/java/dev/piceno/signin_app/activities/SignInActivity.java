@@ -5,31 +5,69 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-
-import dev.piceno.signin_app.R;
+import java.util.Objects;
 import dev.piceno.signin_app.databinding.ActivitySignInBinding;
 import dev.piceno.signin_app.utilities.Constants;
 import dev.piceno.signin_app.utilities.PreferenceManager;
+import dev.piceno.signin_app.utilities.SafeLocal;
 
+/**
+ * This class manages the sign-up process of users.
+ */
 public class SignInActivity extends AppCompatActivity {
 
+    // To retrieve binding and the Preference Manager
     private ActivitySignInBinding binding;
     private PreferenceManager preferenceManager;
+    private FirebaseAuth mAuth;
 
+    /**
+     * Binds the View upon creation.
+     *
+     * @param savedInstanceState The reference to the Bundle object for state restoration.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+            if (firebaseUser != null) {
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    };
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (Objects.nonNull(currentUser)) {
+            // User logged in
+            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            // First time app use.
+            binding = ActivitySignInBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            preferenceManager = new PreferenceManager(getApplicationContext());
+            setListeners();
+        }
+
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
@@ -37,15 +75,21 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     /**
+     * Displays a Toast message with a specified string. Used for visual feedback on the user end.
      *
-     * @param message
+     * @param message The message being displayed to the user.
      */
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Creates listeners for clicking sign in and register buttons.
+     */
     private void setListeners() {
-        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
+        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(
+                new Intent(getApplicationContext(), SignUpActivity.class))
+        );
         binding.buttonSignIn.setOnClickListener(v -> {
             if (validSignIn()) {
                 signIn();
@@ -53,6 +97,9 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Searches database for valid user sign in credentials.
+     */
     private void signIn() {
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -70,6 +117,8 @@ public class SignInActivity extends AppCompatActivity {
                         preferenceManager.putString(Constants.KEY_NAME, documentSnapshot.getString(Constants.KEY_NAME));
                         preferenceManager.putString(Constants.KEY_IMAGE, documentSnapshot.getString(Constants.KEY_IMAGE));
 
+                        SafeLocal.setImage(SafeLocal.getSafetyKey(), documentSnapshot.getString(Constants.KEY_IMAGE));
+                        SafeLocal.setUserName(SafeLocal.getSafetyKey(), documentSnapshot.getString(Constants.KEY_NAME));
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -82,6 +131,11 @@ public class SignInActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Displays the loading icon over the button, indicating searching database process.
+     *
+     * @param isLoading Loading indicator boolean.
+     */
     private void loading(Boolean isLoading) {
         if (isLoading) {
             binding.buttonSignIn.setVisibility(View.INVISIBLE);
@@ -92,6 +146,11 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Determines if the Sign in credentials are properly formatted prior to searching database
+     *
+     * @return Returns true if valid-credentials; false otherwise.
+     */
     private boolean validSignIn() {
         if (binding.inputEmail.getText().toString().trim().isEmpty()) {
             showToast("Please Enter your Email");
@@ -105,5 +164,15 @@ public class SignInActivity extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(authStateListener);
     }
 }
