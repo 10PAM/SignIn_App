@@ -73,6 +73,7 @@ public class SignInActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        showToast("Successfully Signed In");
                         startActivity(intent);
                     } else {
                         loading(false);

@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
     <style name="Theme.SignIn_App" parent="Base.Theme.SignIn_App" />
