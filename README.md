@@ -10,11 +10,11 @@
 Here is the app icon I created for the application. The color is based on the app's primary color.
 
 ### Screenshot 2 (Sign Up Page):
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="600" alt="Screenshot 2" src="https://github.com/user-attachments/assets/5afcfa7c-8762-445e-a1df-ef142fdc656a"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 2" src="https://github.com/user-attachments/assets/5afcfa7c-8762-445e-a1df-ef142fdc656a"></a>  
 Here, a filled out sign up section on the sign up page is displayed.
 
 ### Screenshot 3 (Toast Notification - Improper Sign Up Details):
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="600" alt="Screenshot 3" src="https://github.com/user-attachments/assets/b0d6d19a-213f-4b26-a7a8-9ef0b27e387e"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 3" src="https://github.com/user-attachments/assets/b0d6d19a-213f-4b26-a7a8-9ef0b27e387e"></a>  
 Here, a toast notification is displayed when the password sign up information is improperly formatted.
 
 ### Screenshot 4 (Firebase Console):
@@ -22,8 +22,8 @@ Here, a toast notification is displayed when the password sign up information is
 Here, Firebase Firestore being utilized for the app is displayed, along with the sign up details from my created account. 
 
 ### Screenshot 5 (Sign In):
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="600" alt="Screenshot 5a" src="https://github.com/user-attachments/assets/7f76731d-beac-4d94-aa81-864aace8847e"></a>  
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="300" height="600" alt="Screenshot 5b" src="https://github.com/user-attachments/assets/dda326f8-f71a-4b2e-9f8f-265580306a77"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5a" src="https://github.com/user-attachments/assets/7f76731d-beac-4d94-aa81-864aace8847e"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5b" src="https://github.com/user-attachments/assets/dda326f8-f71a-4b2e-9f8f-265580306a77"></a>  
 Here, a successful login of my created account is visible. 
 
 ### DEMO (Video):
