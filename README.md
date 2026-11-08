@@ -22,8 +22,8 @@ Here, a toast notification is displayed when the password sign up information is
 Here, Firebase Firestore being utilized for the app is displayed, along with the sign up details from my created account. 
 
 ### Screenshot 5 (Sign In):
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5a" src="https://github.com/user-attachments/assets/7f76731d-beac-4d94-aa81-864aace8847e"></a>  
-<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5b" src="https://github.com/user-attachments/assets/dda326f8-f71a-4b2e-9f8f-265580306a77"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5a" src="https://github.com/user-attachments/assets/8d672a3b-82ae-4dc8-8cc8-936416026b04"></a>  
+<a href="https://youtu.be/bLIBh1gaLwE"><img width="270" height="600" alt="Screenshot 5b" src="https://github.com/user-attachments/assets/fdbc1de7-d8cc-4eeb-9a50-dd8ad020b08e"></a>  
 Here, a successful login of my created account is visible. 
 
 ### DEMO (Video):
